@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prosthetics</title>
+    <link rel="icon" type="image/x-icon" href="static/lain.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+<style>
+    .about-me p,
+    .lessons li {
+        text-align: justify;
+    }
+    .arm-intro {
+        margin-bottom: 8px;
+    }
+    .timeline {
+        position: relative;
+        margin: 10px 0 30px 6px;
+        padding-left: 24px;
+        border-left: 1px solid var(--border-color);
+    }
+    .log-entry {
+        position: relative;
+        margin-bottom: 34px;
+    }
+    .log-entry::before {
+        content: "";
+        position: absolute;
+        left: -29px;
+        top: 9px;
+        width: 9px;
+        height: 9px;
+        background: var(--bg-primary);
+        border: 1px solid var(--text-secondary);
+    }
+    .log-entry.current::before {
+        background: var(--link-color);
+        border-color: var(--link-color);
+    }
+    .log-entry h3 {
+        font-size: 16px;
+        margin: 0 0 2px 0;
+    }
+    .log-meta {
+        color: var(--text-secondary);
+        font-size: 13px;
+        margin-bottom: 8px;
+    }
+    .log-tag {
+        display: inline-block;
+        font-size: 11px;
+        padding: 0 6px;
+        margin-left: 6px;
+        border: 1px solid var(--border-color);
+        border-radius: 3px;
+        text-transform: lowercase;
+    }
+    .log-entry p {
+        margin: 6px 0;
+    }
+    .spec-table {
+        border-collapse: collapse;
+        font-size: 13px;
+        margin: 10px 0;
+        width: 100%;
+        max-width: 520px;
+    }
+    .spec-table td {
+        border: 1px solid var(--border-color);
+        padding: 4px 8px;
+        vertical-align: top;
+    }
+    .spec-table td:first-child {
+        color: var(--text-secondary);
+        width: 130px;
+        white-space: nowrap;
+    }
+    .lessons {
+        font-size: 14px;
+        margin: 8px 0 0 0;
+    }
+    .lessons li {
+        font-size: 14px;
+        margin-bottom: 4px;
+    }
+    .exp-gallery {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 10px 0 4px 0;
+    }
+    .exp-gallery img,
+    .exp-gallery video {
+        height: 240px;
+        width: auto;
+        max-width: 100%;
+        object-fit: cover;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        display: block;
+    }
+    .exp-gallery figure {
+        margin: 0;
+        display: table;
+    }
+    .exp-gallery figure.wide {
+        width: 100%;
+    }
+    .exp-gallery figcaption {
+        display: table-caption;
+        caption-side: bottom;
+        margin-top: 4px;
+        font-size: 12px;
+        line-height: 1.4;
+        color: var(--text-secondary);
+    }
+    .writing-item {
+        display: flex;
+        gap: 14px;
+        align-items: stretch;
+        margin-bottom: 16px;
+    }
+    .writing-item > a {
+        position: relative;
+        flex: 0 0 200px;
+        min-height: 110px;
+    }
+    .writing-item img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        box-sizing: border-box;
+        display: block;
+    }
+    .writing-item > div {
+        flex: 1;
+    }
+    @media (max-width: 600px) {
+        .writing-item {
+            flex-direction: column;
+        }
+        .writing-item > a {
+            flex-basis: auto;
+            min-height: 0;
+        }
+        .writing-item img {
+            position: static;
+            height: auto;
+        }
+    }
+    .writing-item p {
+        margin: 4px 0 0 0;
+        text-align: left;
+    }
+    .todo {
+        color: var(--text-secondary);
+        font-style: italic;
+    }
+</style>
+</head>
+<body>
+    <img id="bg-flyingmachine" src="static/imgs/flyingmachine.png" alt="" aria-hidden="true">
+    <img id="bg-flyin2" src="static/imgs/flyin2.png" alt="" aria-hidden="true">
+    <img id="bg-vitruvian" src="static/imgs/Vitruvianischer_Mann.png" alt="" aria-hidden="true">
+    <div class="site-container">
+        <div class="about-me">
+            <h1 class="site-header">
+                <span>Prosthetics &amp; cybernetics</span>
+                <a href="https://shunyaresearch.systems" target="_blank" rel="noopener">
+                    <img src="static/shunya.png" alt="Shunya Research" class="header-logo header-logo-light">
+                    <img src="static/shunya-removebg-preview.png" alt="Shunya Research" class="header-logo header-logo-dark">
+                </a>
+            </h1>
+
+            <h2>Intro</h2>
+            <p class="arm-intro">A running log of my work on prosthetics and cybernetics.</p>
+            <p>My first brush with cybernetics was General Molotov, the cyborg general from the Russian sci-fi campaign in Empire Earth.</p>
+            <div class="exp-gallery">
+                <figure>
+                    <a href="static/imgs/arm/intro-molotov.jpg"><img src="static/imgs/arm/intro-molotov.jpg" alt="General Molotov, the cyborg from Empire Earth, shown from four angles"></a>
+                    <figcaption>General Molotov, the cyborg general from Empire Earth.</figcaption>
+                </figure>
+            </div>
+            <p>Later I watched a TV documentary about <a href="https://www.guinnessworldrecords.com/world-records/first-successful-artificial-eye" target="_blank" rel="noopener">Jeremiah "Jerry" Teehan</a>, a blind man who got some of his sight back through William Dobelle's artificial vision system: a camera on his glasses wired straight into electrodes on his visual cortex. That one really caught my attention.</p>
+            <div class="exp-gallery">
+                <figure>
+                    <a href="static/imgs/arm/intro-dobelle.jpg"><img src="static/imgs/arm/intro-dobelle.jpg" alt="Diagram of Dobelle's artificial vision system: a TV camera on glasses, a pedestal on the skull and electrodes on the visual cortex"></a>
+                    <figcaption>Dobelle's artificial vision system: a camera on the glasses feeds electrodes on the visual cortex.</figcaption>
+                </figure>
+            </div>
+            <p>In my second semester of college, during a very boring quantum computing class, I sat next to a friend who was missing a few fingers. We became friends right away and I wanted to build him a prosthetic arm. My CAD skills sucked, but I could make up for that with embedded systems, electronics and ML, so I teamed up with other people. My attempts are logged below.</p>
+            <p>I've since taken a drop year from college to explore ideas in neuroscience and AI, but building him a complete arm is still a goal sitting in the back of my head.</p>
+            
+            <p>Another big source of inspiration is Mike Pondsmith's Cyberpunk universe, where companies like Dynalar and Kiroshi make implants that give people back the limbs and sight they've lost so they can live normal lives. This might be the wrong lesson to take from cyberpunk lmao but yes people in general have a better quality of life thanks to implants, other cyberpunk media like Ghost in The Shell have also influenced me.</p>
+            <div class="exp-gallery">
+                <figure>
+                    <a href="static/imgs/arm/intro-dynalar.jpg"><img src="static/imgs/arm/intro-dynalar.jpg" alt="Dynalar cyberarm ad: Be super human, the power of god in your fingertips"></a>
+                    <figcaption>A Dynalar cyberarm ad.</figcaption>
+                </figure>
+                <figure>
+                    <a href="static/imgs/arm/intro-kiroshi.jpg"><img src="static/imgs/arm/intro-kiroshi.jpg" alt="Kiroshi Opticals ad: a fighter pilot, 'It happens in a blink of an eye'"></a>
+                    <figcaption>A Kiroshi Opticals ad.</figcaption>
+                </figure>
+                <figure>
+                    <a href="static/imgs/arm/intro-arasaka.jpg"><img src="static/imgs/arm/intro-arasaka.jpg" alt="Arasaka Extreme Performance ad: a pit crew servicing a cyborg sprinter on the starting line"></a>
+                    <figcaption>An Arasaka "Extreme Performance" ad.</figcaption>
+                </figure>
+                <figure>
+                    <video src="static/imgs/arm/intro-gits.mp4" autoplay muted loop playsinline aria-label="Ghost in the Shell: cyborg hands splitting into dozens of fingers to type at superhuman speed"></video>
+                    <figcaption>Ghost in the Shell (1995): cyborg hands splitting into dozens of fingers to type at superhuman speed.</figcaption>
+                </figure>
+            </div>
+
+            <h2>Writing</h2>
+            <div class="writing-item">
+                <a href="https://cyb3r17.substack.com/p/gnosis-through-technological-acceleration" target="_blank" rel="noopener"><img src="static/imgs/arm/writing-gnosis.jpg" alt="Gustave Doré's engraving of Jacob wrestling with the angel"></a>
+                <div>
+                    <a href="https://cyb3r17.substack.com/p/gnosis-through-technological-acceleration" target="_blank" rel="noopener">Gnosis through technological acceleration</a>
+                    <div class="log-meta">May 23, 2026 · Substack</div>
+                    <p>A beginner's guide to waging jihad against the Demiurge. Why accelerating science and technology is how we break the natural laws of death, disease and scarcity.</p>
+                </div>
+            </div>
+
+            <h2>Log</h2>
+            <div class="timeline">
+
+                <!--
+                    To add an entry, copy this block to the top of the timeline.
+                    Add class="log-entry current" to the build you're working on now.
+                    Tags: wip, working, done, research, retired, planned, failed
+
+                <div class="log-entry">
+                    <h3>name <span class="log-tag">wip</span></h3>
+                    <div class="log-meta">Mon YYYY - Mon YYYY</div>
+                    <p>What it is and what it does.</p>
+                    <table class="spec-table">
+                        <tr><td>input</td><td>...</td></tr>
+                        <tr><td>actuation</td><td>...</td></tr>
+                        <tr><td>controller</td><td>...</td></tr>
+                        <tr><td>dof</td><td>...</td></tr>
+                    </table>
+                    <ul class="lessons">
+                        <li>What you learnt.</li>
+                    </ul>
+                    <div class="exp-gallery">
+                        <figure>
+                            <a href="static/imgs/arm/photo.jpg"><img src="static/imgs/arm/photo.jpg" alt="..."></a>
+                            <figcaption>Caption.</figcaption>
+                        </figure>
+                        <figure>
+                            <video src="static/imgs/arm/clip.mp4" controls></video>
+                            <figcaption>Caption.</figcaption>
+                        </figure>
+                    </div>
+                </div>
+                -->
+
+                <div class="log-entry current">
+                    <h3>Touch prostheses <span class="log-tag">wip</span></h3>
+                    <div class="log-meta">in progress</div>
+                    <p>Will update soon, waiting on parts lol</p>
+                    <!-- diagram goes here -->
+                </div>
+
+                <div class="log-entry">
+                    <h3><a href="https://shunyaresearch.systems/blogs/fly-vision-restoration.html" target="_blank" rel="noopener">Neural prostheses: restoring fly vision from the connectome</a> <span class="log-tag">research</span></h3>
+                    <div class="log-meta">Oct 2026 · blog post at Shunya Research</div>
+                    <p>Moving from the arm to the brain: can a connectome, the full wiring diagram of a nervous system, be used to design a neural prosthesis? Using the male <i>Drosophila</i> connectome, a camera-driven prosthesis replaces a fly's damaged early visual pathway (photoreceptors through T4/T5 motion cells) and writes into the intact circuit downstream. The goal is to bring back the looming escape, where a fly jumps away from something approaching.</p>
+                    <table class="spec-table">
+                        <tr><td>sensor</td><td>camera resampled onto a 721-facet model compound eye at 200 Hz</td></tr>
+                        <tr><td>encoder</td><td>correlator motion detector (~50 ms leaky memory), 4 direction-selective T4/T5 channels</td></tr>
+                        <tr><td>circuit</td><td>82 right-side LPLC2 cells, their inhibitory partners, ~2,000 synapses into the giant fiber, giant fiber to jump/flight motor neurons</td></tr>
+                        <tr><td>neurons</td><td>leaky integrate-and-fire giant fiber and motor neurons, graded LPLC2</td></tr>
+                        <tr><td>body</td><td>NeuroMechFly physics simulation</td></tr>
+                    </table>
+                    <ul class="lessons">
+                        <li>Every approaching object fired the giant fiber. Sideways motion, dimming, receding objects and forward walking never did.</li>
+                        <li>Downstream timing matches biology: the jump motor neuron fires 0.2 ms after a giant fiber spike, and the body leaves the ground 5 ms later.</li>
+                        <li>It escapes late. It fires at 61-73° where real flies peak at about 42°, and misses approaches faster than ~20 mm/s. Most of that comes from the encoder and the missing LC4 pathway, not the connectome.</li>
+                        <li>The sensor limits a prosthesis before any neurons do. A webcam at its real ~50° field of view covered only 59 of 721 facets, and the fly never escaped.</li>
+                        <li>Next: add LC4, make the looming detectors spike, and pair it with an event camera for a fully spiking camera-to-jump prosthesis.</li>
+                    </ul>
+                    <div class="exp-gallery">
+                        <figure class="wide">
+                            <a href="https://shunyaresearch.systems/blogs/fly-vision-restoration.html" target="_blank" rel="noopener"><img src="https://shunyaresearch.systems/blogs/fly-vision-restoration/media/pipeline.png" alt="The fly's own escape pathway compared with the prosthetic one, where a camera, hex eye and encoder replace photoreceptors through T4/T5" style="width:100%;height:auto;"></a>
+                            <figcaption>Top: the fly's own escape pathway. Bottom: the prosthetic version, where a camera, hex eye and encoder replace everything up to T4/T5.</figcaption>
+                        </figure>
+                        <figure>
+                            <video src="static/imgs/arm/fly-live.mp4" controls muted loop playsinline style="height:320px;" aria-label="Webcam demo: a hand approaching the laptop camera makes the simulated fly jump"></video>
+                            <figcaption>Webcam demo: a hand approaching the laptop camera makes the simulated fly jump.</figcaption>
+                        </figure>
+                    </div>
+                </div>
+
+                <div class="log-entry">
+                    <h3>EMG-controlled prosthetic arm <span class="log-tag">done</span></h3>
+                    <div class="log-meta">Jun 2026</div>
+                    <p>The follow-up to silverhand, built as a team project at university. Instead of if-else rules on sensor readings, it reads muscle activity from the forearm and classifies what the hand is trying to do. Surface EMG electrodes feed an Arduino Uno, a Python pipeline filters the signal and extracts features, and an SVM picks the gesture, which then drives a 3D printed tendon hand. A digital twin, a 3D arm rendered in PyGame/PyOpenGL, mirrors the predictions live.</p>
+                    <table class="spec-table">
+                        <tr><td>input</td><td>single-channel surface EMG (AD8232), sampled at 1 kHz</td></tr>
+                        <tr><td>processing</td><td>50 Hz notch filter, 200-sample windows with 50% overlap</td></tr>
+                        <tr><td>features</td><td>RMS, MAV, zero crossings, variance, peak-to-peak</td></tr>
+                        <tr><td>model</td><td>SVM (RBF kernel), 2 gestures: rest, fist</td></tr>
+                        <tr><td>actuation</td><td>MG90 servos, tendon (string) driven, PLA</td></tr>
+                        <tr><td>controller</td><td>Arduino Uno</td></tr>
+                    </table>
+                    <ul class="lessons">
+                        <li>More channels would give more control, but hardware costs are a bottleneck.</li>
+                        <li>Less bulky than silverhand, but still not optimized enough to be actually useful.</li>
+                    </ul>
+                    <div class="exp-gallery">
+                        <figure>
+                            <a href="static/emg.jpeg"><img src="static/emg.jpeg" alt="EMG electrodes on forearm wired to an Arduino" style="height:320px;"></a>
+                            <figcaption>Surface EMG electrodes on the forearm, wired to the sensor board and an Arduino Uno.</figcaption>
+                        </figure>
+                        <figure>
+                            <video src="static/digital_twin.mp4" controls style="height:320px;"></video>
+                            <figcaption>The digital twin mirroring my hand's gestures live.</figcaption>
+                        </figure>
+                    </div>
+                    <div class="exp-gallery">
+                        <figure>
+                            <a href="static/imgs/arm/emg-fingers.jpg"><img src="static/imgs/arm/emg-fingers.jpg" alt="Early printed fingers with tendons"></a>
+                            <figcaption>Early printed fingers with tendons.</figcaption>
+                        </figure>
+                        <figure>
+                            <a href="static/imgs/arm/emg-cad.jpg"><img src="static/imgs/arm/emg-cad.jpg" alt="CAD model of the hand"></a>
+                            <figcaption>CAD model of the hand.</figcaption>
+                        </figure>
+                        <figure>
+                            <a href="static/imgs/arm/emg-servos.jpg"><img src="static/imgs/arm/emg-servos.jpg" alt="Servo bank"></a>
+                            <figcaption>The servo bank that pulls the tendons.</figcaption>
+                        </figure>
+                        <figure>
+                            <a href="static/imgs/arm/emg-internals.jpg"><img src="static/imgs/arm/emg-internals.jpg" alt="Hand internals with tendons routed"></a>
+                            <figcaption>Inside the hand, with the tendons routed.</figcaption>
+                        </figure>
+                        <figure>
+                            <a href="static/imgs/arm/emg-hand.jpg"><img src="static/imgs/arm/emg-hand.jpg" alt="The red printed hand and forearm laid out on a table"></a>
+                            <figcaption>The printed hand and forearm, not yet fully assembled.</figcaption>
+                        </figure>
+                        <figure>
+                            <a href="static/imgs/arm/emg-hand-held.jpg"><img src="static/imgs/arm/emg-hand-held.jpg" alt="Holding the red printed hand"></a>
+                            <figcaption>The printed hand, held up for scale.</figcaption>
+                        </figure>
+                        <figure>
+                            <a href="static/imgs/arm/emg-test-rig.jpg"><img src="static/imgs/arm/emg-test-rig.jpg" alt="Hand wired up to the electronics on a desk"></a>
+                            <figcaption>The hand wired up to the electronics for testing.</figcaption>
+                        </figure>
+                    </div>
+                </div>
+
+                <div class="log-entry">
+                    <h3><a href="https://github.com/cyb3r17/silverhand" target="_blank" rel="noopener">silverhand</a> <span class="log-tag">done</span></h3>
+                    <div class="log-meta">Jan 2025</div>
+                    <p>My first cybernetic arm prototype. A 3D printed hand where servos on the forearm pull string tendons to curl each finger. Piezoelectric sensors pick up input and firmware written in C++ maps the readings to servo angles.</p>
+                    <table class="spec-table">
+                        <tr><td>input</td><td>piezoelectric sensors</td></tr>
+                        <tr><td>actuation</td><td>servos, tendon (string) driven</td></tr>
+                        <tr><td>firmware</td><td>C++</td></tr>
+                        <tr><td>controller</td><td>Arduino Uno</td></tr>
+                        <tr><td>dof</td><td>5 (one per finger)</td></tr>
+                    </table>
+                    <ul class="lessons">
+                        <li>Could grip simple objects.</li>
+                        <li>Piezoelectric sensors work well as an input.</li>
+                        <li>The design itself was too big and bulky.</li>
+                        <li>The control logic was just a couple of if-else statements. It needed to be smarter than that.</li>
+                        <li>It was purely reactive. A real prosthetic should work with intent and naturally, not just react to sensor readings.</li>
+                    </ul>
+                    <div class="exp-gallery">
+                        <figure>
+                            <a href="static/silverhand.png"><img src="static/silverhand.png" alt="silverhand" style="height:320px;"></a>
+                            <figcaption>MY friend with the first prototype using piezoelectric sensors, his face is censored for privacy.</figcaption>
+                        </figure>
+                    </div>
+                </div>
+
+            </div>
+
+            &copy; 2026 Sachit | sachitrame.sh
+        </div>
+
+        <div class="status">
+
+            <div id="spotify" class="spotify-widget">
+                <h2>
+                    Listening to
+                    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                        <i class="fa-solid fa-sun theme-icon" id="sun-icon"></i>
+                        <i class="fa-solid fa-moon theme-icon" id="moon-icon"></i>
+                    </button>
+                </h2>
+                <a id="spotify-link" href="#" target="_blank" rel="noopener" class="spotify-card" hidden>
+                    <img id="spotify-art" class="spotify-art" src="" alt="">
+                    <div class="spotify-meta">
+                        <div id="spotify-song" class="spotify-song"></div>
+                        <div id="spotify-artist" class="spotify-artist"></div>
+                        <div class="spotify-bar"><div id="spotify-progress" class="spotify-progress"></div></div>
+                    </div>
+                </a>
+                <p id="spotify-idle" class="spotify-idle">not playing anything rn</p>
+            </div>            <h2>Links</h2>
+            <div>
+   <a href="https://www.github.com/cyb3r17" target="_blank" rel="noopener">github</a> • <a href="https://x.com/cyb3r_17" target="_blank" rel="noopener">x/twitter</a> • <a href="mailto:sachit[dot]rg17[at]gmail.com" target="_blank" rel="noopener">email</a> • <a href="https://www.last.fm/user/cyb3r17" target="_blank" rel="noopener">last.fm</a> • <a href="https://www.goodreads.com/cyb3r17" target="_blank" rel="noopener">goodreads</a> • <a href="https://scholar.google.com/citations?hl=en&user=ftcEwSEAAAAJ" target="_blank" rel="noopener">google scholar</a> • <a href="https://www.youtube.com/@cyberwasbored" target="_blank" rel="noopener">youtube</a>
+</div>
+            <h2>Site navigation</h2>
+            <div class="nav-links">
+                <ul>
+                    <li><a href="index.html">/home/</a></li>
+                    <li><a href="projects.html">/projects/</a></li>
+                    <li><a href="gallery.html">/gallery/</a></li>                    <li><a href="https://substack.com/@cyb3r17" target="_blank" rel="noopener">/blogs/</a></li>
+                </ul>
+            </div>
+
+            <div class="pbuttons">
+                <h2>Buttons</h2>
+                <a href="https://kernel.org" target="_blank" rel="noopener"><img src="static/imgs/buttons/made_onlinux.gif"></a>
+                <a href="https://github.com/cyb3r17/darkwire" target="_blank" rel="noopener"><img src="static/imgs/darkwire88x31.png"></a>
+                <a href="https://nixos.org/" target="_blank" rel="noopener"><img src="static/imgs/buttons/nixos2.gif"></a>
+                <a href="https://vscodium.com/" target="_blank" rel="noopener"><img src="static/imgs/buttons/vscbutton.gif"></a>
+                <a href="https://www.firefox.com/en-US/" target="_blank" rel="noopener"><img src="static/imgs/buttons/button102.gif"></a>
+                <a href="https://archive.org/" target="_blank" rel="noopener"><img src="static/imgs/buttons/a60.gif"></a>
+                <a href="https://landchad.net/" target="_blank" rel="noopener"><img src="static/imgs/buttons/landchad.gif"></a>
+                <a href="https://www.gnu.org/" target="_blank" rel="noopener"><img src="static/imgs/buttons/gnu.png"></a>
+                <a href="https://en.wikipedia.org/wiki/Annexation_of_Tibet_by_the_People%27s_Republic_of_China" target="_blank" rel="noopener"><img src="static/imgs/buttons/button_tibet.gif"></a>
+                <a href="https://youtu.be/6-8E4Nirh9s?si=f3Bz0Uz22VVWpSOS" target="_blank" rel="noopener"><img src="static/imgs/buttons/caramelldansen.gif"></a>
+            </div>
+
+            <h2>My button</h2>
+            <div class="my-button-box">
+                <img src="static/my_button.gif" alt="Sachit's button" width="88" height="31">
+                <textarea readonly rows="3" onclick="this.select()"><a href="https://sachitrame.sh" target="_blank" rel="noopener"><img src="https://sachitrame.sh/static/my_button.gif" alt="Sachit"></a></textarea>
+                <p class="hotlink-note">If you liked my site, add my button =]</p>
+            </div>
+
+            <h2>Banners</h2>
+            <img class="banner-img" src="static/TempleOS_logo.png" alt="TempleOS"><br>
+            Use <a href="https://templeos.org" target="_blank" rel="noopener">Temple OS</a>
+            <br><br>
+            <img class="banner-img" src="static/imgs/aphex2.jpg" alt="Wanderer"><br>
+            Listen to <a href="https://aphextwin.warp.net/" target="_blank" rel="noopener">Aphex Twin</a>
+            <br><br>
+            <img class="banner-img" src="static/imgs/samurai.jpg" alt="Samurai"><br>
+            Play <a href="https://www.cyberpunk.net" target="_blank" rel="noopener">Cyberpunk 2077</a>
+
+            <p class="quote">
+                "An idiot admires complexity, a genius admires simplicity"<br>— Terry A Davis
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function updateThemeIcons(theme) {
+            const sunIcon = document.getElementById('sun-icon');
+            const moonIcon = document.getElementById('moon-icon');
+
+            if (theme === 'dark') {
+                sunIcon.classList.add('active');
+                moonIcon.classList.remove('active');
+            } else {
+                sunIcon.classList.remove('active');
+                moonIcon.classList.add('active');
+            }
+        }
+
+        function toggleProject(header) {
+            const arrow = header.querySelector('.project-arrow');
+            const content = header.nextElementSibling;
+            arrow.classList.toggle('expanded');
+            content.classList.toggle('expanded');
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcons(newTheme);
+        }
+
+       const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        updateThemeIcons(savedTheme);
+    </script>
+    <script src="spotify.js"></script>
+
+</body>
+</html>
