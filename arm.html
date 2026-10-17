@@ -165,6 +165,9 @@
             height: auto;
         }
     }
+    .twitter-tweet p {
+        text-align: left;
+    }
     .writing-item p {
         margin: 4px 0 0 0;
         text-align: left;
@@ -307,6 +310,7 @@
                             <figcaption>Webcam demo: a hand approaching the laptop camera makes the simulated fly jump.</figcaption>
                         </figure>
                     </div>
+                    <blockquote class="twitter-tweet" data-dnt="true"><p lang="en" dir="ltr">Can connectomes help us design neural prostheses? 🧠🦾 🪰<br><br>We tried to design one for a fruit fly. We give a simulated blind fly a camera and a hand-built motion detector, we then wired everything downstream of that straight into its connectome.<br><br>Here’s how we did it:<br><br>A fly <a href="https://t.co/gb8EYVXQ2I">pic.x.com/gb8EYVXQ2I</a></p>&mdash; Shunya Research (@shunyaresearch) <a href="https://x.com/shunyaresearch/status/2106390073910731176">October 3, 2026</a></blockquote>
                 </div>
 
                 <div class="log-entry">
@@ -502,6 +506,10 @@
         updateThemeIcons(savedTheme);
     </script>
     <script src="spotify.js"></script>
+    <script>
+        document.querySelectorAll('.twitter-tweet').forEach(t => t.setAttribute('data-theme', savedTheme));
+    </script>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 </body>
 </html>
