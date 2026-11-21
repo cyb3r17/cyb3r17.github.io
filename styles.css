@@ -185,68 +185,6 @@ h1 {
     color: var(--text-secondary);
 }
 
-.spotify-card {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    text-decoration: none;
-    color: inherit;
-}
-
-.spotify-art {
-    width: 64px;
-    height: 64px;
-    border-radius: 4px;
-    border: 1px solid var(--border-color);
-    object-fit: cover;
-    flex-shrink: 0;
-}
-
-.spotify-meta {
-    min-width: 0;
-    flex: 1;
-}
-
-.spotify-now {
-    font-size: 12px;
-    color: var(--text-secondary);
-    margin-bottom: 2px;
-}
-
-.spotify-song {
-    font-weight: bold;
-    font-size: 14px;
-    overflow-wrap: anywhere;
-}
-
-.spotify-artist {
-    font-size: 13px;
-    color: var(--text-secondary);
-    overflow-wrap: anywhere;
-}
-
-.spotify-bar {
-    height: 4px;
-    background: var(--bg-secondary);
-    border-radius: 2px;
-    margin-top: 6px;
-    overflow: hidden;
-}
-
-.spotify-progress {
-    height: 100%;
-    width: 0%;
-    background: var(--link-color);
-    transition: width 1s linear;
-}
-
-.spotify-idle {
-    font-size: 13px;
-    color: var(--text-secondary);
-    font-style: italic;
-    margin: 0;
-}
-
 .webring {
     margin-top: 20px;
     margin-bottom: 24px;
@@ -360,54 +298,6 @@ a:not(:has(img)):hover {
     height: 31px;
     margin-right: 10px;
     border: 1px solid var(--border-color);
-}
-
-.status-indicator {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    margin-right: 5px;
-}
-
-.status-online { background-color: #43b581; }
-.status-idle { background-color: #faa61a; }
-.status-dnd { background-color: #f04747; }
-.status-offline { background-color: #747f8d; }
-
-.spotify-container {
-    margin-top: 10px;
-    padding: 10px;
-    background-color: var(--bg-secondary);
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-}
-
-.spotify-art {
-    width: 80px;
-    height: 80px;
-    border-radius: 4px;
-    float: left;
-    margin-right: 10px;
-}
-
-.spotify-info {
-    font-size: 13px;
-    line-height: 1.4;
-}
-
-.spotify-song {
-    font-weight: bold;
-    margin-bottom: 3px;
-}
-
-.discord-status {
-    margin-bottom: 20px;
-}
-
-.status-loading {
-    font-size: 14px;
-    color: var(--text-secondary);
 }
 
 .theme-toggle {
